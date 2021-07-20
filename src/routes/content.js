@@ -49,7 +49,7 @@ router.delete("/:aidi", async (req, res) => {
     const con = await mysql.createConnection(mysqlConfig);
 
     const [data] = await con.execute(
-      `DELTE items WHERE id = ${req.params.aidi}
+      `DELETE FROM items WHERE id = ${req.params.aidi}
       `
     );
 

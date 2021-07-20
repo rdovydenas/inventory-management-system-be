@@ -25,7 +25,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.post(`/qty/:aidi`, async (req, res) => {
+router.post("/qty/:aidi", async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 
@@ -34,10 +34,28 @@ router.post(`/qty/:aidi`, async (req, res) => {
       WHERE id = ${req.params.aidi}
       `
     );
-    const [updated] = await con.execute(`SELECT * FROM items`);
+    const [updated] = await con.execute("SELECT * FROM items");
     con.end();
 
     return res.status(200).send(updated);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ error: "Database error" });
+  }
+});
+
+router.delete("/:aidi", async (req, res) => {
+  try {
+    const con = await mysql.createConnection(mysqlConfig);
+
+    const [data] = await con.execute(
+      `DELTE items WHERE id = ${req.params.aidi}
+      `
+    );
+
+    con.end();
+
+    return res.status(200).send("Item deleted from db");
   } catch (err) {
     console.log(err);
     return res.status(500).send({ error: "Database error" });

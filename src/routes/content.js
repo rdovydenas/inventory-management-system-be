@@ -10,12 +10,13 @@ router.post("/add", async (req, res) => {
     const con = await mysql.createConnection(mysqlConfig);
 
     const [data] = await con.execute(
-      `INSERT INTO items (item_name, item_size, item_color, item_quantity) VALUES ('${String(
+      `INSERT INTO items (item_name, item_size, item_color, item_quantity, item_image) VALUES ('${String(
         req.body.name
       )}', '${String(req.body.size)}', '${req.body.color}', '${String(
         Number(req.body.quantity)
-      )}')`
+      )}', '${String(req.body.image)}' )`
     );
+
     con.end();
 
     return res.send(data);

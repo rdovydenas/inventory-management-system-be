@@ -25,13 +25,13 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.post("/qty/:aidi", async (req, res) => {
+router.post("/qty/:id", async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 
     const [data] = await con.execute(
       `UPDATE items SET item_quantity = ${req.body.quantity}
-      WHERE id = ${req.params.aidi}
+      WHERE id = ${req.params.id}
       `
     );
     const [updated] = await con.execute("SELECT * FROM items");
@@ -44,18 +44,19 @@ router.post("/qty/:aidi", async (req, res) => {
   }
 });
 
-router.delete("/:aidi", async (req, res) => {
+router.delete("/item/:id", async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 
     const [data] = await con.execute(
-      `DELETE FROM items WHERE id = ${req.params.aidi}
+      `DELETE FROM items
+       WHERE id = ${req.params.id}
       `
     );
 
     con.end();
 
-    return res.status(200).send("Item deleted from db");
+    return res.status(200).send(data);
   } catch (err) {
     console.log(err);
     return res.status(500).send({ error: "Database error" });

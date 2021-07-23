@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
         email: data[0].email,
       },
       jwtSecret,
-      { expiresIn: 50 * 50 }
+      { expiresIn: 60 * 60 }
     );
 
     return res.send({ message: "Logging in", token });

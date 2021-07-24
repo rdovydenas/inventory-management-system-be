@@ -64,7 +64,7 @@ router.delete("/item/:id", async (req, res) => {
   }
 });
 
-router.get("/", middleware.loggedIn, async (req, res) => {
+router.get("/",  async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 
@@ -72,7 +72,7 @@ router.get("/", middleware.loggedIn, async (req, res) => {
     con.end();
 
     if (data.length === 0) {
-      return res.send({ message: "No items" });
+      return res.status(410).send({ message: "No items" });
     }
 
     return res.send(data);

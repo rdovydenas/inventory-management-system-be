@@ -14,7 +14,7 @@ router.post("/add", async (req, res) => {
         req.body.name
       )}', '${String(req.body.size)}', '${req.body.color}', '${String(
         Number(req.body.quantity)
-      )}', '${String(req.body.image)}' )`
+      )}', '${req.body.image}' )`
     );
 
     con.end();
@@ -64,7 +64,7 @@ router.delete("/item/:id", async (req, res) => {
   }
 });
 
-router.get("/",  async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 

@@ -65,7 +65,7 @@ router.delete("/item/:id", middleware.loggedIn, async (req, res) => {
   }
 });
 
-router.get("/", middleware.loggedIn, async (req, res) => {
+router.get("/",  async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 

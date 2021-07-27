@@ -8,6 +8,7 @@ const { loggedIn } = require("../middleware");
 router.post("/add", middleware.loggedIn, async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
+    console.log(req);
 
     const [data] = await con.execute(
       `INSERT INTO items (item_name, item_size, item_color, item_quantity, item_image) VALUES ('${String(
@@ -69,11 +70,8 @@ router.get("/", middleware.loggedIn, async (req, res) => {
     const con = await mysql.createConnection(mysqlConfig);
 
     const [data] = await con.execute("SELECT * FROM items");
-    con.end();
 
-    if (data.length === 0) {
-      return res.status(410).send({ message: "No items" });
-    }
+    con.end();
 
     return res.send(data);
   } catch (err) {

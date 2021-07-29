@@ -80,4 +80,21 @@ router.get("/", loggedIn, async (req, res) => {
   }
 });
 
+router.get("/users", isLoggedIn, async (req, res) => {
+  try {
+    const con = await mysql.createConnection(mysqlConfig);
+
+    const [data] = await con.execute(
+      `SELECT id FROM users WHERE id=${req.userData.id}`
+    );
+    con.end();
+
+    res.send(data[0]);
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .send({ error: "Database error. Please try again later" });
+  }
+});
 module.exports = router;

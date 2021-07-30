@@ -80,7 +80,7 @@ router.get("/", loggedIn, async (req, res) => {
   }
 });
 
-router.get("/users", isLoggedIn, async (req, res) => {
+router.get("/users", loggedIn, async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 

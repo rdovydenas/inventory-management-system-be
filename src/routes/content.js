@@ -5,7 +5,7 @@ const mysql = require("mysql2/promise");
 const { mysqlConfig } = require("../config");
 const { loggedIn } = require("../middleware");
 
-router.post("/add", loggedIn, async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
     console.log(req);
@@ -27,7 +27,7 @@ router.post("/add", loggedIn, async (req, res) => {
   }
 });
 
-router.post("/qty/:id", loggedIn, async (req, res) => {
+router.post("/qty/:id", async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 
@@ -46,7 +46,7 @@ router.post("/qty/:id", loggedIn, async (req, res) => {
   }
 });
 
-router.delete("/item/:id", loggedIn, async (req, res) => {
+router.delete("/item/:id", async (req, res) => {
   try {
     const con = await mysql.createConnection(mysqlConfig);
 

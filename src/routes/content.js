@@ -11,11 +11,9 @@ router.post("/add", async (req, res) => {
     console.log(req);
 
     const [data] = await con.execute(
-      `INSERT INTO items (item_name, item_size, item_color, item_quantity, item_image) VALUES ('${String(
-        req.body.name
-      )}', '${String(req.body.size)}', '${req.body.color}', '${String(
-        Number(req.body.quantity)
-      )}', '${req.body.image}' )`
+      `INSERT INTO items (item_name, item_size, item_color, item_quantity, item_price, item_image) VALUES ('${req.body.name}',
+       '${req.body.size}', '${req.body.color}', '${req.body.quantity}', 
+       '${req.body.price}', '${req.body.image}' )`
     );
 
     con.end();
